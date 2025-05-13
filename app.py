@@ -1,13 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, g, session
 from flask_mail import Mail, Message
-from flask_babel import Babel, gettext as _, get_locale
+from flask_babel import Babel, get_locale
 import os
 from dotenv import load_dotenv
+
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 load_dotenv()
 
-app = Flask(__name__)
+# Initialize Flask app with explicit static_folder
+app = Flask(__name__,
+            static_folder='static',  # Explicitly define static folder
+            static_url_path='/static')  # Explicit URL path for static files
 
 # Configuration from environment variables
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-dev-key')
@@ -23,41 +32,52 @@ app.config['MAIL_DEFAULT_SENDER'] = (
     os.getenv('MAIL_DEFAULT_SENDER_NAME', 'NAS Builder'),
     os.getenv('MAIL_DEFAULT_SENDER_EMAIL', 'nasbuilder@example.com')
 )
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Babel configuration
-app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_DEFAULT_LOCALE'] = 'bg'
 app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'bg']
-app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'translations')
 
 # Admin email for receiving form submissions
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@example.com')
 
-mail = Mail(app)
-babel = Babel(app)
-
 
 def get_locale():
-    # Try to get the language from the session
     if 'language' in session:
+        logger.debug(f"Language from session: {session['language']}")
         return session['language']
 
-    # If not in session, try to detect from browser
-    return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+    best_match = request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+    logger.debug(f"Language from browser: {best_match}")
+    return best_match
 
 
-# Register the locale selector function with Babel
-babel.locale_selector_func = get_locale
+mail = Mail(app)
+babel = Babel()
+babel.init_app(app, locale_selector=get_locale)
+
+
+@app.before_request
+def before_request():
+    g.locale = get_locale()
 
 
 @app.route('/language/<language>')
 def set_language(language):
-    session['language'] = language
-    return redirect(request.referrer or url_for('index'))
+    if language in ['en', 'bg']:
+        session['language'] = language  # Set the language in the session
+    return redirect(request.referrer or url_for('index'))  # Redirect to the previous page
 
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('landing.html')
+
+
+@app.route('/request', methods=['GET'])
+def request_form():
+    return render_template('form.html')
 
 
 @app.route('/submit', methods=['POST'])
@@ -65,6 +85,7 @@ def submit_form():
     # Get form data
     name = request.form.get('name')
     email = request.form.get('email')
+    phone = request.form.get('phone')
     usage_type = request.form.get('usage_type')
     storage_needs = request.form.get('storage_needs')
     backup_plans = request.form.get('backup_plans')
@@ -100,6 +121,7 @@ def submit_form():
         Информация за клиента:
         - Име: {name}
         - Имейл: {email}
+        - Телефон: {phone}
 
         Изисквания:
         - Тип на използване: {usage_type}
@@ -136,6 +158,7 @@ def submit_form():
         Customer Information:
         - Name: {name}
         - Email: {email}
+        - Phone: {phone}
 
         Requirements:
         - Usage Type: {usage_type}
