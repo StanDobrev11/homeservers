@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom NAS Builder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Custom NAS Builder</h1>
+        </header>
+        
+        <section class="intro">
+            <h2>Welcome to Custom NAS Builder</h2>
+            <p>Are you looking for a personalized Network Attached Storage (NAS) solution for your home or office?</p>
+            <p>I build customized NAS systems tailored to your specific needs, whether you're looking for:</p>
+            <ul>
+                <li>Simple file storage and backup</li>
+                <li>Media streaming and Plex server setup</li>
+                <li>Office document collaboration</li>
+                <li>Professional backup solutions</li>
+                <li>Custom applications and services</li>
+            </ul>
+            <p>Fill out the form below to help me understand your needs, and I'll create a personalized NAS build recommendation just for you.</p>
+        </section>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <section class="form-section">
+            <h2>NAS Requirements Form</h2>
+            <form action="{{ url_for('submit_form') }}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="usage_type">Primary Usage</label>
+                    <select id="usage_type" name="usage_type" required>
+                        <option value="">-- Select --</option>
+                        <option value="home_basic">Home Basic (File Storage, Photos)</option>
+                        <option value="home_media">Home Media (Plex, Streaming)</option>
+                        <option value="small_business">Small Business</option>
+                        <option value="professional">Professional/Enterprise</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="storage_needs">Storage Needs</label>
+                    <select id="storage_needs" name="storage_needs" required>
+                        <option value="">-- Select --</option>
+                        <option value="less_than_4tb">Less than 4TB</option>
+                        <option value="4tb_to_12tb">4TB to 12TB</option>
+                        <option value="12tb_to_30tb">12TB to 30TB</option>
+                        <option value="more_than_30tb">More than 30TB</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="backup_plans">Backup Requirements</label>
+                    <select id="backup_plans" name="backup_plans" required>
+                        <option value="">-- Select --</option>
+                        <option value="basic_redundancy">Basic Redundancy (RAID 1)</option>
+                        <option value="performance_redundancy">Performance & Redundancy (RAID 5/6)</option>
+                        <option value="offsite_backup">Offsite Backup Solutions</option>
+                        <option value="full_disaster_recovery">Full Disaster Recovery</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget">Budget Range</label>
+                    <select id="budget" name="budget" required>
+                        <option value="">-- Select --</option>
+                        <option value="under_500">Under $500</option>
+                        <option value="500_to_1000">$500 to $1,000</option>
+                        <option value="1000_to_2000">$1,000 to $2,000</option>
+                        <option value="over_2000">Over $2,000</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comments">Additional Requirements or Comments</label>
+                    <textarea id="comments" name="comments" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </section>
+        
+        <footer>
+            <p>&copy; 2023 Custom NAS Builder. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
