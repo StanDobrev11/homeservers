@@ -29,11 +29,9 @@ csrf = CSRFProtect(app)
 
 # Replace MailHog configuration with Brevo API key
 BREVO_API_KEY = os.getenv('BREVO_API_KEY')
-if not BREVO_API_KEY:
-    logger.warning("BREVO_API_KEY environment variable is not set or empty!")
 
-SENDER_NAME = os.getenv('SENDER_NAME', 'NAS Builder')
-SENDER_EMAIL = os.getenv('SENDER_EMAIL', 'no-reply@cloudmachine.uk')
+SENDER_NAME = os.getenv('SENDER_NAME')
+SENDER_EMAIL = os.getenv('SENDER_EMAIL')
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -43,7 +41,7 @@ app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'bg']
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'translations')
 
 # Admin email for receiving form submissions
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'dobrev81@gmail.com Alexander_Zarchev@cargill.com')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 
 def get_locale():
