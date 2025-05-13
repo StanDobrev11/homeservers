@@ -160,7 +160,7 @@ def index():
 def request_form():
     return render_template('form.html')
 
-
+@app.route('/submit', methods=['POST'])
 def submit_form():
     # Get form data
     name = request.form.get('name')
