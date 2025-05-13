@@ -61,12 +61,28 @@ def get_locale():
 babel = Babel()
 babel.init_app(app, locale_selector=get_locale)
 
+def get_admin_emails():
+    """Parse the ADMIN_EMAIL env var into a list of valid email addresses."""
+    if not ADMIN_EMAIL:
+        return []
+    # Split by spaces or commas
+    emails = []
+    for part in ADMIN_EMAIL.replace(',', ' ').split():
+        if '@' in part:  # Simple validation
+            emails.append(part.strip())
+    return emails
 
-# Add function to send email with Brevo
+
 def send_email(to_email, subject, html_content, text_content=None):
     """
     Send email using Brevo API
     """
+    # Input validation
+    if not BREVO_API_KEY:
+        error_msg = "Brevo API key is not configured"
+        logger.error(error_msg)
+        return False, error_msg
+
     # Configure API key authorization
     configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key['api-key'] = BREVO_API_KEY
@@ -74,9 +90,34 @@ def send_email(to_email, subject, html_content, text_content=None):
     # Create an instance of the API class
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 
-    # Define sender and recipient
+    # Define sender
     sender = {"name": SENDER_NAME, "email": SENDER_EMAIL}
-    to = [{"email": to_email}]
+
+    # Handle different types of email inputs
+    if isinstance(to_email, list):
+        # If it's a list of emails
+        to = []
+        for email_addr in to_email:
+            if isinstance(email_addr, str) and '@' in email_addr:
+                to.append({"email": email_addr.strip()})
+                logger.debug(f"Added recipient: {email_addr.strip()}")
+    else:
+        # If it's a single email
+        if isinstance(to_email, str) and '@' in to_email:
+            to = [{"email": to_email.strip()}]
+            logger.debug(f"Set single recipient: {to_email.strip()}")
+        else:
+            error_msg = f"Invalid email address: {to_email}"
+            logger.error(error_msg)
+            return False, error_msg
+
+    # If no valid recipients, return error
+    if not to:
+        error_msg = "No valid recipient email addresses found"
+        logger.error(error_msg)
+        return False, error_msg
+
+    logger.debug(f"Sending email to: {to}")
 
     # Create SendSmtpEmail object
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
@@ -120,7 +161,6 @@ def request_form():
     return render_template('form.html')
 
 
-@app.route('/submit', methods=['POST'])
 def submit_form():
     # Get form data
     name = request.form.get('name')
@@ -132,8 +172,12 @@ def submit_form():
     budget = request.form.get('budget')
     comments = request.form.get('comments')
 
+    # Log received data
+    logger.debug(f"Form submitted by: {name} <{email}> - {phone}")
+
     # Get the current locale for email content
     current_locale = get_locale()
+
 
     # Create email content with translated content
     if current_locale == 'bg':
@@ -293,7 +337,6 @@ def submit_form():
         success_message = 'Your request has been submitted successfully! Check your email for confirmation.'
         error_message = 'There was an error sending your request: '
 
-    # Send emails using Brevo
     try:
         # Send to user
         success_user, error_user = send_email(
@@ -303,21 +346,30 @@ def submit_form():
             text_content=user_text
         )
 
-        # Send to admin
-        success_admin, error_admin = send_email(
-            to_email=[email for email in ADMIN_EMAIL.split(' ')],
-            subject=owner_subject,
-            html_content=owner_body,
-            text_content=owner_text
-        )
+        # Get admin emails
+        admin_emails = get_admin_emails()
+        if not admin_emails:
+            logger.warning("No valid admin emails configured. Cannot send notification.")
 
-        if success_user and success_admin:
+        # Send to admin
+        success_admin, error_admin = False, None
+        if admin_emails:
+            success_admin, error_admin = send_email(
+                to_email=admin_emails,
+                subject=owner_subject,
+                html_content=owner_body,
+                text_content=owner_text
+            )
+
+        # Handle success/failure
+        if success_user and (success_admin or not admin_emails):
             flash(success_message, 'success')
         else:
             error_details = error_user or error_admin
             flash(f'{error_message} {error_details}', 'error')
 
     except Exception as e:
+        logger.exception("Unexpected error when sending emails")
         flash(f'{error_message} {str(e)}', 'error')
 
     return redirect(url_for('index'))

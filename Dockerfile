@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 
-
 COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
@@ -18,4 +17,5 @@ ENV FLASK_RUN_PORT=5000
 ENV PYTHONUNBUFFERED=1
 
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+
