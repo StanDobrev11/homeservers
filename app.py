@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, g, session
-# Remove Flask-Mail import
-# from flask_mail import Mail, Message
 from flask_babel import Babel
+from flask_wtf.csrf import CSRFProtect  # Import CSRFProtect
 import os
 from dotenv import load_dotenv
 import logging
@@ -25,6 +24,9 @@ app = Flask(__name__,
 # Configuration from environment variables
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-dev-key')
 
+# Initialize CSRF protection
+csrf = CSRFProtect(app)
+
 # Replace MailHog configuration with Brevo API key
 BREVO_API_KEY = os.getenv('BREVO_API_KEY')
 SENDER_NAME = os.getenv('SENDER_NAME', 'NAS Builder')
@@ -38,7 +40,7 @@ app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'bg']
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'translations')
 
 # Admin email for receiving form submissions
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', ['dobrev81@gmail.com, Alexander_Zarchev@cargill.com'])
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'dobrev81@gmail.com Alexander_Zarchev@cargill.com')
 
 
 def get_locale():
