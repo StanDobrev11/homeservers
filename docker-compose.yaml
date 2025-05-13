@@ -1,12 +1,15 @@
 services:
-
-#  redis:
-#    image: "redis:alpine"
-#    ports:
-#      - "6379:6379"
-
-  mailhog:
-    image: mailhog/mailhog
+  web:
+    build: .
+    restart: always
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "5000:5000"
+    environment:
+      - BREVO_API_KEY=${BREVO_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - SENDER_NAME=${SENDER_NAME}
+      - SENDER_EMAIL=${SENDER_EMAIL}
+      - SERVER_NAME=${SERVER_NAME}
+    volumes:
+      - ./:/app
