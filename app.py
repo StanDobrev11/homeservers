@@ -29,6 +29,9 @@ csrf = CSRFProtect(app)
 
 # Replace MailHog configuration with Brevo API key
 BREVO_API_KEY = os.getenv('BREVO_API_KEY')
+if not BREVO_API_KEY:
+    logger.warning("BREVO_API_KEY environment variable is not set or empty!")
+
 SENDER_NAME = os.getenv('SENDER_NAME', 'NAS Builder')
 SENDER_EMAIL = os.getenv('SENDER_EMAIL', 'no-reply@cloudmachine.uk')
 
