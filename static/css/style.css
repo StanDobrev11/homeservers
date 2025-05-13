@@ -1,118 +1,19 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f5f7fa;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
+.language-selector {
+    margin-top: 10px;
     text-align: center;
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
 }
 
-h1 {
-    color: #2c3e50;
-}
-
-.intro {
-    margin-bottom: 40px;
-}
-
-.intro h2 {
-    margin-bottom: 15px;
-    color: #3498db;
-}
-
-.intro ul {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-.form-section {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-section h2 {
-    margin-bottom: 20px;
-    color: #3498db;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
+.lang-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
     border-radius: 4px;
-    font-family: inherit;
+    text-decoration: none;
+    color: #333;
+    background-color: #f0f0f0;
 }
 
-textarea {
-    resize: vertical;
-}
-
-.submit-btn {
+.lang-btn.active {
     background-color: #3498db;
     color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: #2980b9;
-}
-
-footer {
-    margin-top: 40px;
-    text-align: center;
-    color: #7f8c8d;
-    font-size: 14px;
-}
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
 }

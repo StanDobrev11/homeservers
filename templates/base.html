@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Custom NAS Builder') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ _('Custom NAS Builder') }}</h1>
+            <div class="language-selector">
+                <a href="{{ url_for('set_language', language='en') }}" class="lang-btn {% if g.locale == 'en' %}active{% endif %}">English</a>
+                <a href="{{ url_for('set_language', language='bg') }}" class="lang-btn {% if g.locale == 'bg' %}active{% endif %}">Български</a>
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        <footer>
+            <p>{{ _('© 2023 Custom NAS Builder. All rights reserved.') }}</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
