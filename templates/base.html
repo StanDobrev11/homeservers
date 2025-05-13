@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Custom NAS Builder') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <header class="site-header">
+    <div class="navbar">
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <span class="logo-text">{{ _('HomeServers') }}</span>
+            </a>
+        </div>
+        {#    <div class="logo-container">#}
+        {#    <a href="{{ url_for('index') }}" class="logo">#}
+        {#        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="HomeServers Logo" class="logo-img">#}
+        {#    </a>#}
+        {#</div>#}
+
+
+        <nav class="main-nav">
+            <a href="{{ url_for('index') }}" class="nav-link {% if request.path == url_for('index') %}active{% endif %}">{{ _('Home') }}</a>
+            <a href="{{ url_for('request_form') }}" class="nav-link {% if request.path == url_for('request_form') %}active{% endif %}">{{ _('Request Custom NAS') }}</a>
+        </nav>
+
+        <div class="language-selector">
+            <a href="{{ url_for('set_language', language='en') }}"
+               class="lang-btn {% if g.locale == 'en' %}active{% endif %}">EN</a>
+            <a href="{{ url_for('set_language', language='bg') }}"
+               class="lang-btn {% if g.locale == 'bg' %}active{% endif %}">BG</a>
+        </div>
+    </div>
+</header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>{{ gettext('© 2025 Custom NAS Builder. All rights reserved.') }}</p>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

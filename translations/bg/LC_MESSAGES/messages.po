@@ -1,0 +1,321 @@
+# Bulgarian translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-05-13 22:05+0000\n"
+"PO-Revision-Date: 2025-05-13 20:28+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: bg\n"
+"Language-Team: bg <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/base.html:6
+msgid "Custom NAS Builder"
+msgstr "Конфигуратор за домашен NAS"
+
+#: templates/base.html:15
+msgid "HomeServers"
+msgstr "HomeServers"
+
+#: templates/base.html:26
+msgid "Home"
+msgstr "Начало"
+
+#: templates/base.html:27 templates/landing.html:56
+msgid "Request Custom NAS"
+msgstr "Заяви персонализиран NAS"
+
+#: templates/base.html:50
+#, fuzzy
+msgid "© 2025 Custom NAS Builder. All rights reserved."
+msgstr "© 2023 Конфигуратор за NAS. Всички права запазени."
+
+#: templates/form.html:5
+msgid "NAS Requirements Form"
+msgstr "Форма за изисквания към NAS"
+
+#: templates/form.html:6
+msgid ""
+"Fill out the form below to help me understand your needs, and I'll create"
+" a personalized NAS build recommendation just for you."
+msgstr ""
+"Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, и "
+"ще изготвя персонализирана препоръка за NAS система специално за вас."
+
+#: templates/form.html:12
+msgid "Name"
+msgstr "Име"
+
+#: templates/form.html:17
+msgid "Email"
+msgstr "Имейл"
+
+#: templates/form.html:22
+msgid "Primary Usage"
+msgstr "Основна употреба"
+
+#: templates/form.html:24 templates/form.html:35 templates/form.html:46
+#: templates/form.html:57
+msgid "-- Select --"
+msgstr "-- Изберете --"
+
+#: templates/form.html:25
+msgid "Home Basic (File Storage, Photos)"
+msgstr "Домашно базово (съхранение на файлове, снимки)"
+
+#: templates/form.html:26
+msgid "Home Media (Plex, Streaming)"
+msgstr "Домашна мултимедия (Plex, стрийминг)"
+
+#: templates/form.html:27
+msgid "Small Business"
+msgstr "Малък бизнес"
+
+#: templates/form.html:28
+msgid "Professional/Enterprise"
+msgstr "Професионално/Корпоративно"
+
+#: templates/form.html:33
+msgid "Storage Needs"
+msgstr "Нужди от съхранение"
+
+#: templates/form.html:36
+msgid "Less than 4TB"
+msgstr "По-малко от 4TB"
+
+#: templates/form.html:37
+msgid "4TB to 12TB"
+msgstr "От 4TB до 12TB"
+
+#: templates/form.html:38
+msgid "12TB to 30TB"
+msgstr "От 12TB до 30TB"
+
+#: templates/form.html:39
+msgid "More than 30TB"
+msgstr "Над 30TB"
+
+#: templates/form.html:44
+msgid "Backup Requirements"
+msgstr "Изисквания за архивиране"
+
+#: templates/form.html:47
+msgid "Basic Redundancy (RAID 1)"
+msgstr "Базова излишност (RAID 1)"
+
+#: templates/form.html:48
+msgid "Performance & Redundancy (RAID 5/6)"
+msgstr "Производителност и излишност (RAID 5/6)"
+
+#: templates/form.html:49
+msgid "Offsite Backup Solutions"
+msgstr "Архивиране извън обекта"
+
+#: templates/form.html:50
+msgid "Full Disaster Recovery"
+msgstr "Пълно възстановяване след бедствия"
+
+#: templates/form.html:55
+msgid "Budget Range"
+msgstr "Бюджетен диапазон"
+
+#: templates/form.html:58
+msgid "Under $500"
+msgstr "Под $500"
+
+#: templates/form.html:59
+msgid "$500 to $1,000"
+msgstr "От $500 до $1,000"
+
+#: templates/form.html:60
+msgid "$1,000 to $2,000"
+msgstr "От $1,000 до $2,000"
+
+#: templates/form.html:61
+msgid "Over $2,000"
+msgstr "Над $2,000"
+
+#: templates/form.html:66
+msgid "Additional Requirements or Comments"
+msgstr "Допълнителни изисквания или коментари"
+
+#: templates/form.html:71
+msgid "Submit Request"
+msgstr "Изпрати заявка"
+
+#: templates/landing.html:5
+msgid "Take Control of Your Digital World – At Home!"
+msgstr "Поеми контрол над своя дигитален свят – у дома!"
+
+#: templates/landing.html:8
+msgid "Introducing Your Personal Media Fortress"
+msgstr "Представяме ви вашата лична медийна крепост"
+
+#: templates/landing.html:9
+msgid ""
+"Tired of being limited by the cloud? Want high speed and performance for "
+"your photos, music, movies and files – anytime, anywhere, without "
+"limitations?"
+msgstr ""
+"Уморени ли сте от ограниченията на облака? Искате висока скорост и "
+"производителност за вашите снимки, музика, филми и файлове – по всяко "
+"време, навсякъде, без ограничения?"
+
+#: templates/landing.html:11
+msgid "We Build and Install Personal Home Servers"
+msgstr "Изграждаме и инсталираме персонални домашни сървъри"
+
+#: templates/landing.html:12
+msgid ""
+"Whether you are a consumer, creator, media enthusiast, or a business in "
+"need of storage, we deliver powerful, secure, scalable solutions tailored"
+" to your needs and requirements."
+msgstr ""
+"Независимо дали сте потребител, създател на съдържание, медиен ентусиаст "
+"или бизнес с нужда от съхранение, ние предоставяме мощни, сигурни и "
+"мащабируеми решения, съобразени с вашите нужди."
+
+#: templates/landing.html:15
+msgid "Keep Everything You Love"
+msgstr "Съхранете всичко, което обичате"
+
+#: templates/landing.html:17
+msgid "Photos"
+msgstr "Снимки"
+
+#: templates/landing.html:18
+msgid "Music"
+msgstr "Музика"
+
+#: templates/landing.html:19
+msgid "Movies"
+msgstr "Филми"
+
+#: templates/landing.html:20
+msgid "Documents"
+msgstr "Документи"
+
+#: templates/landing.html:21
+msgid "Backups & Much More"
+msgstr "Архиви и много повече"
+
+#: templates/landing.html:26
+msgid "Why Choose Us?"
+msgstr "Защо да изберете нас?"
+
+#: templates/landing.html:28
+msgid "Fast Speed"
+msgstr "Висока скорост"
+
+#: templates/landing.html:29
+msgid "High Data Control and Complete Privacy"
+msgstr "Пълен контрол върху данните и пълна поверителност"
+
+#: templates/landing.html:30
+msgid "No Monthly Fees or Choose Subscription Maintenance"
+msgstr "Без месечни такси или възможност за абонаментна поддръжка"
+
+#: templates/landing.html:31
+msgid "Seamless Streaming and Sharing"
+msgstr "Безпроблемно стриймване и споделяне"
+
+#: templates/landing.html:32
+msgid "Expert Installation and Support"
+msgstr "Професионална инсталация и поддръжка"
+
+#: templates/landing.html:36
+msgid "Your Data. Your Rules. Your Server."
+msgstr "Вашите данни. Вашите правила. Вашият сървър."
+
+#: templates/landing.html:38
+msgid ""
+"Contact us today and discover how easy it is to have your personal "
+"digital space."
+msgstr ""
+"Свържете се с нас днес и открийте колко лесно е да имате свое собствено "
+"дигитално пространство."
+
+#: templates/landing.html:39
+msgid "Personal. Reliable. Made Specifically for You."
+msgstr "Персонално. Надеждно. Създадено специално за вас."
+
+#: templates/landing.html:41
+msgid "[Varna Servers] – Powering Your Digital Freedom"
+msgstr "[Varna Servers] – Вашата дигитална свобода"
+
+#: templates/landing.html:44
+msgid "Sample Configuration:"
+msgstr "Примерна конфигурация:"
+
+#: templates/landing.html:46
+msgid "Energy-efficient computer with i-3 CPU"
+msgstr "Енергийно ефективен компютър с i-3 процесор"
+
+#: templates/landing.html:47
+msgid "4GB RAM"
+msgstr "4GB RAM"
+
+#: templates/landing.html:48
+msgid "128 GB SSD"
+msgstr "128 GB SSD"
+
+#: templates/landing.html:49
+msgid "4 TB mirrored storage or 8 TB with no backup"
+msgstr "4 TB огледално съхранение или 8 TB без резервно копие"
+
+#: templates/landing.html:51
+msgid ""
+"Price: 800 BGN + Shipping costs to be paid by the recipient (Promotion "
+"for assembly, installation and setup)"
+msgstr ""
+"Цена: 800 лв. + разходи за доставка за сметка на получателя (промоция за "
+"сглобяване, инсталация и настройка)"
+
+#: templates/landing.html:52
+msgid "We can compile more powerful configurations at the client's request"
+msgstr "Можем да предложим по-мощни конфигурации по желание на клиента"
+
+#~ msgid "Welcome to Custom NAS Builder"
+#~ msgstr "Добре дошли в конфигуратора за домашен NAS"
+
+#~ msgid ""
+#~ "Are you looking for a personalized "
+#~ "Network Attached Storage (NAS) solution "
+#~ "for your home or office?"
+#~ msgstr "Търсите персонализирано NAS решение за вашия дом или офис?"
+
+#~ msgid ""
+#~ "I build customized NAS systems tailored"
+#~ " to your specific needs, whether "
+#~ "you're looking for:"
+#~ msgstr ""
+#~ "Изграждам персонализирани NAS системи според"
+#~ " вашите нужди, независимо дали търсите:"
+
+#~ msgid "Simple file storage and backup"
+#~ msgstr "Просто съхранение на файлове и архивиране"
+
+#~ msgid "Media streaming and Plex server setup"
+#~ msgstr "Поточно предаване на мултимедия и настройка на Plex сървър"
+
+#~ msgid "Office document collaboration"
+#~ msgstr "Съвместна работа с офис документи"
+
+#~ msgid "Professional backup solutions"
+#~ msgstr "Професионални решения за архивиране"
+
+#~ msgid "Custom applications and services"
+#~ msgstr "Персонализирани приложения и услуги"
+
+#~ msgid "Request Form"
+#~ msgstr "Заяви персонализиран NAS"
+
