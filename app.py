@@ -59,6 +59,7 @@ def get_locale():
 babel = Babel()
 babel.init_app(app, locale_selector=get_locale)
 
+
 def get_admin_emails():
     """Parse the ADMIN_EMAIL env var into a list of valid email addresses."""
     if not ADMIN_EMAIL:
@@ -158,6 +159,7 @@ def index():
 def request_form():
     return render_template('form.html')
 
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     # Get form data
@@ -170,16 +172,11 @@ def submit_form():
     budget = request.form.get('budget')
     comments = request.form.get('comments')
 
-    # TODO name to be of letters only
-    # TODO verification of email - valid email
-    # TODO verification of phone - 10 digits with
-
     # Log received data
     logger.debug(f"Form submitted by: {name} <{email}> - {phone}")
 
     # Get the current locale for email content
     current_locale = get_locale()
-
 
     # Create email content with translated content
     if current_locale == 'bg':

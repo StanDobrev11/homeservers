@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!valid) {
             event.preventDefault();
-            alert('Please fill out all required fields.');
+            alert(translations.requiredFields || 'Please fill out all required fields.');
         }
     });
 });
@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!nameRegex.test(nameValue)) {
             nameInput.classList.add('invalid-input');
             nameError.style.display = 'block';
-            nameError.textContent = 'Name must contain only letters and be at least 3 characters long';
+            // Use the translated message from the translations object defined in the template
+            nameError.textContent = translations.nameError || 'Name must contain only letters and be at least 3 characters long';
             return false;
         } else {
             nameInput.classList.remove('invalid-input');
@@ -76,11 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailValue = emailInput.value.trim();
         // RFC 5322 compliant email regex
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+    
         if (!emailRegex.test(emailValue)) {
             emailInput.classList.add('invalid-input');
             emailError.style.display = 'block';
-            emailError.textContent = 'Please enter a valid email address';
+            // Use the translated message
+            emailError.textContent = translations.emailError || 'Please enter a valid email address';
             return false;
         } else {
             emailInput.classList.remove('invalid-input');
@@ -91,14 +93,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Validation function for the phone field
     function validatePhone() {
-        const phoneValue = '0' + phoneInput.value.trim();
-        // Bulgarian phone format: 10 digits starting with 0
-        const phoneRegex = /^0[0-9]{9}$/;
+            const phoneValue = phoneInput.value.trim();
+            // Bulgarian phone format: 9 digits after the leading 0 (which is shown separately in UI)
+            const phoneRegex = /^[0-9]{9}$/;
         
         if (!phoneRegex.test(phoneValue)) {
             phoneInput.classList.add('invalid-input');
             phoneError.style.display = 'block';
-            phoneError.textContent = 'Please enter a valid phone number (9 digits after the leading 0)';
+            // Use the translated message
+            phoneError.textContent = translations.phoneError || 'Please enter a valid phone number (9 digits after the leading 0)';
             return false;
         } else {
             phoneInput.classList.remove('invalid-input');
@@ -112,24 +115,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove non-digit characters
         let value = e.target.value.replace(/\D/g, '');
         
-        // Add leading zero if missing
-        if (value && value.charAt(0) !== '0') {
-            value = '0' + value;
+        // Limit to 9 digits (since the leading 0 is displayed separately in the UI)
+        if (value.length > 9) {
+            value = value.substring(0, 9);
         }
         
-        // Limit to 10 digits
-        if (value.length > 10) {
-            value = value.substring(0, 10);
-        }
-        
-        // Display without the leading zero in the input field, since we show it separately
-        let displayValue = value;
-        if (value.startsWith('0') && value.length > 1) {
-            displayValue = value.substring(1);
-        }
-        
-        // Update input value
-        e.target.value = displayValue;
+        // Update input value directly - we only need the 9 digits after the (0)
+        e.target.value = value;
     });
 
     // Live validation as user types
@@ -169,8 +161,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const hiddenPhoneInput = document.createElement('input');
             hiddenPhoneInput.type = 'hidden';
             hiddenPhoneInput.name = 'full_phone';
-            hiddenPhoneInput.value = '+359' + phoneInput.value; // Add country code to the digits after (0)
+            hiddenPhoneInput.value = '+359' + phoneInput.value; // Add country code to the 9 digits
+            
+            // Also add the full format with the leading 0
+            const fullNumberInput = document.createElement('input');
+            fullNumberInput.type = 'hidden';
+            fullNumberInput.name = 'full_bg_number';
+            fullNumberInput.value = '0' + phoneInput.value; // Add leading 0 to the 9 digits
+            
             form.appendChild(hiddenPhoneInput);
+            form.appendChild(fullNumberInput);
+            
+            console.log('Phone number formatted:', {
+                enteredDigits: phoneInput.value,
+                internationalFormat: '+359' + phoneInput.value, 
+                localFormat: '0' + phoneInput.value
+            });
         }
 
         // Validate other required fields
@@ -185,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!valid) {
             event.preventDefault();
-            alert('Please correct all errors before submitting the form.');
+            alert(translations.validationErrors || 'Please correct all errors before submitting the form.');
         }
     });
 });
