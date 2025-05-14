@@ -13,17 +13,30 @@
 
             <div class="form-group">
                 <label for="name">{{ _('Name') }}</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required
+                       pattern="[A-Za-z\u00C0-\u017F\s]{3,}"
+                       title="{{ _('Name must contain only letters and be at least 3 characters long') }}">
             </div>
+
 
             <div class="form-group">
                 <label for="email">{{ _('Email') }}</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required
+                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                       title="{{ _('Please enter a valid email address') }}">
             </div>
 
             <div class="form-group">
                 <label for="phone">{{ _('Phone Number') }}</label>
-                <input type="tel" id="phone" name="phone" required>
+                <div class="phone-input-container">
+                    <span class="country-code">+359</span>
+                    <span class="leading-zero">(0)</span>
+                    <input type="tel" id="phone" name="phone" required
+                           placeholder="887123456" 
+                           pattern="0[0-9]{9}"
+                           title="{{ _('Please enter a valid Bulgarian phone number (10 digits starting with 0)') }}">
+                </div>
+                <small class="form-text text-muted">{{ _('Format: +359 (0) 887123456') }}</small>
             </div>
 
             <div class="form-group">

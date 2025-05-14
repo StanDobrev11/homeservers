@@ -170,6 +170,10 @@ def submit_form():
     budget = request.form.get('budget')
     comments = request.form.get('comments')
 
+    # TODO name to be of letters only
+    # TODO verification of email - valid email
+    # TODO verification of phone - 10 digits with
+
     # Log received data
     logger.debug(f"Form submitted by: {name} <{email}> - {phone}")
 

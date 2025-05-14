@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-13 22:05+0000\n"
+"POT-Creation-Date: 2025-05-14 10:05+0000\n"
 "PO-Revision-Date: 2025-05-13 20:28+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: bg\n"
@@ -22,19 +22,19 @@ msgstr ""
 msgid "Custom NAS Builder"
 msgstr "Конфигуратор за домашен NAS"
 
-#: templates/base.html:15
+#: templates/base.html:16
 msgid "HomeServers"
 msgstr "HomeServers"
 
-#: templates/base.html:26
+#: templates/base.html:27
 msgid "Home"
 msgstr "Начало"
 
-#: templates/base.html:27 templates/landing.html:56
+#: templates/base.html:28 templates/landing.html:56
 msgid "Request Custom NAS"
 msgstr "Заяви персонализиран NAS"
 
-#: templates/base.html:50
+#: templates/base.html:51
 #, fuzzy
 msgid "© 2025 Custom NAS Builder. All rights reserved."
 msgstr "© 2023 Конфигуратор за NAS. Всички права запазени."
@@ -47,108 +47,128 @@ msgstr "Форма за изисквания към NAS"
 msgid ""
 "Fill out the form below to help me understand your needs, and I'll create"
 " a personalized NAS build recommendation just for you."
-msgstr ""
+msgstr "Моля, въведете валиден български телефонен номер (9 цифри след водещата 0)"
 "Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, и "
 "ще изготвя персонализирана препоръка за NAS система специално за вас."
 
-#: templates/form.html:12
+#: templates/form.html:15
 msgid "Name"
 msgstr "Име"
 
-#: templates/form.html:17
+#: templates/form.html:18
+msgid "Name must contain only letters and be at least 3 characters long"
+msgstr "Името трябва да съдържа само букви и да е поне 3 символа"
+
+#: templates/form.html:23
 msgid "Email"
 msgstr "Имейл"
 
-#: templates/form.html:22
+#: templates/form.html:26
+msgid "Please enter a valid email address"
+msgstr "Моля, въведете валиден имейл адрес"
+
+#: templates/form.html:30
+msgid "Phone Number"
+msgstr "Телефонен номер"
+
+#: templates/form.html:37
+msgid "Please enter a valid Bulgarian phone number (10 digits starting with 0)"
+msgstr "Моля, въведете валиден български телефонен номер (10 цифри, започващи с 0)"
+
+#: templates/form.html:39
+msgid "Format: +359 (0) 887123456"
+msgstr "Формат: +359 (0) 887123456"
+
+#: templates/form.html:43
 msgid "Primary Usage"
 msgstr "Основна употреба"
 
-#: templates/form.html:24 templates/form.html:35 templates/form.html:46
-#: templates/form.html:57
+#: templates/form.html:45 templates/form.html:56 templates/form.html:67
+#: templates/form.html:78
 msgid "-- Select --"
 msgstr "-- Изберете --"
 
-#: templates/form.html:25
+#: templates/form.html:46
 msgid "Home Basic (File Storage, Photos)"
 msgstr "Домашно базово (съхранение на файлове, снимки)"
 
-#: templates/form.html:26
+#: templates/form.html:47
 msgid "Home Media (Plex, Streaming)"
 msgstr "Домашна мултимедия (Plex, стрийминг)"
 
-#: templates/form.html:27
+#: templates/form.html:48
 msgid "Small Business"
 msgstr "Малък бизнес"
 
-#: templates/form.html:28
+#: templates/form.html:49
 msgid "Professional/Enterprise"
 msgstr "Професионално/Корпоративно"
 
-#: templates/form.html:33
+#: templates/form.html:54
 msgid "Storage Needs"
 msgstr "Нужди от съхранение"
 
-#: templates/form.html:36
+#: templates/form.html:57
 msgid "Less than 4TB"
 msgstr "По-малко от 4TB"
 
-#: templates/form.html:37
+#: templates/form.html:58
 msgid "4TB to 12TB"
 msgstr "От 4TB до 12TB"
 
-#: templates/form.html:38
+#: templates/form.html:59
 msgid "12TB to 30TB"
 msgstr "От 12TB до 30TB"
 
-#: templates/form.html:39
+#: templates/form.html:60
 msgid "More than 30TB"
 msgstr "Над 30TB"
 
-#: templates/form.html:44
+#: templates/form.html:65
 msgid "Backup Requirements"
 msgstr "Изисквания за архивиране"
 
-#: templates/form.html:47
+#: templates/form.html:68
 msgid "Basic Redundancy (RAID 1)"
 msgstr "Базова излишност (RAID 1)"
 
-#: templates/form.html:48
+#: templates/form.html:69
 msgid "Performance & Redundancy (RAID 5/6)"
 msgstr "Производителност и излишност (RAID 5/6)"
 
-#: templates/form.html:49
+#: templates/form.html:70
 msgid "Offsite Backup Solutions"
 msgstr "Архивиране извън обекта"
 
-#: templates/form.html:50
+#: templates/form.html:71
 msgid "Full Disaster Recovery"
 msgstr "Пълно възстановяване след бедствия"
 
-#: templates/form.html:55
+#: templates/form.html:76
 msgid "Budget Range"
 msgstr "Бюджетен диапазон"
 
-#: templates/form.html:58
+#: templates/form.html:79
 msgid "Under $500"
 msgstr "Под $500"
 
-#: templates/form.html:59
+#: templates/form.html:80
 msgid "$500 to $1,000"
 msgstr "От $500 до $1,000"
 
-#: templates/form.html:60
+#: templates/form.html:81
 msgid "$1,000 to $2,000"
 msgstr "От $1,000 до $2,000"
 
-#: templates/form.html:61
+#: templates/form.html:82
 msgid "Over $2,000"
 msgstr "Над $2,000"
 
-#: templates/form.html:66
+#: templates/form.html:87
 msgid "Additional Requirements or Comments"
 msgstr "Допълнителни изисквания или коментари"
 
-#: templates/form.html:71
+#: templates/form.html:92
 msgid "Submit Request"
 msgstr "Изпрати заявка"
 
