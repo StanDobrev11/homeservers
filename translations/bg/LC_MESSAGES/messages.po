@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-14 10:18+0000\n"
+"POT-Creation-Date: 2025-05-14 18:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: bg\n"
@@ -67,8 +67,7 @@ msgid ""
 "Fill out the form below to help me understand your needs, and I'll create"
 " a personalized NAS build recommendation just for you."
 msgstr ""
-"Моля, въведете валиден български телефонен номер (9 цифри след водещата "
-"0)Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, "
+"Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, "
 "и ще изготвя персонализирана препоръка за NAS система специално за вас."
 
 #: templates/form.html:26
@@ -84,8 +83,9 @@ msgid "Phone Number"
 msgstr "Телефонен номер"
 
 #: templates/form.html:48
-msgid "Please enter a valid Bulgarian phone number (10 digits starting with 0)"
-msgstr "Моля, въведете валиден български телефонен номер (10 цифри, започващи с 0)"
+#, fuzzy
+msgid "Please enter a valid Bulgarian phone number (9 digits after the leading 0)"
+msgstr "Моля, въведете валиден телефонен номер (9 цифри след водещата 0)"
 
 #: templates/form.html:50
 msgid "Format: +359 (0) 887123456"
@@ -212,8 +212,7 @@ msgid ""
 "need of storage, we deliver powerful, secure, scalable solutions tailored"
 " to your needs and requirements."
 msgstr ""
-"Моля, въведете валиден телефонен номер (9 цифри след водещата "
-"0)Независимо дали сте потребител, създател на съдържание, медиен "
+"Независимо дали сте потребител, създател на съдържание, медиен "
 "ентусиаст или бизнес с нужда от съхранение, ние предоставяме мощни, "
 "сигурни и мащабируеми решения, съобразени с вашите нужди."
 
@@ -274,7 +273,7 @@ msgid ""
 "Contact us today and discover how easy it is to have your personal "
 "digital space."
 msgstr ""
-"Моля, коригирайте всички грешки преди да изпратите формуляра.Свържете се "
+"Свържете се "
 "с нас днес и открийте колко лесно е да имате свое собствено дигитално "
 "пространство."
 
@@ -317,39 +316,3 @@ msgstr ""
 #: templates/landing.html:52
 msgid "We can compile more powerful configurations at the client's request"
 msgstr "Можем да предложим по-мощни конфигурации по желание на клиента"
-
-#~ msgid "Welcome to Custom NAS Builder"
-#~ msgstr "Добре дошли в конфигуратора за домашен NAS"
-
-#~ msgid ""
-#~ "Are you looking for a personalized "
-#~ "Network Attached Storage (NAS) solution "
-#~ "for your home or office?"
-#~ msgstr "Търсите персонализирано NAS решение за вашия дом или офис?"
-
-#~ msgid ""
-#~ "I build customized NAS systems tailored"
-#~ " to your specific needs, whether "
-#~ "you're looking for:"
-#~ msgstr ""
-#~ "Изграждам персонализирани NAS системи според"
-#~ " вашите нужди, независимо дали търсите:"
-
-#~ msgid "Simple file storage and backup"
-#~ msgstr "Просто съхранение на файлове и архивиране"
-
-#~ msgid "Media streaming and Plex server setup"
-#~ msgstr "Поточно предаване на мултимедия и настройка на Plex сървър"
-
-#~ msgid "Office document collaboration"
-#~ msgstr "Съвместна работа с офис документи"
-
-#~ msgid "Professional backup solutions"
-#~ msgstr "Професионални решения за архивиране"
-
-#~ msgid "Custom applications and services"
-#~ msgstr "Персонализирани приложения и услуги"
-
-#~ msgid "Request Form"
-#~ msgstr "Заяви персонализиран NAS"
-
