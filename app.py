@@ -4,6 +4,8 @@ from flask_wtf.csrf import CSRFProtect  # Import CSRFProtect
 import os
 from dotenv import load_dotenv
 import logging
+import uuid
+from datetime import datetime
 
 # Import Brevo's SDK
 import sib_api_v3_sdk
@@ -15,6 +17,10 @@ logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 load_dotenv()
+
+# Initialize visitor tracking
+visitor_count = 0
+visitors = {}
 
 # Initialize Flask app with explicit static_folder
 app = Flask(__name__,
@@ -45,20 +51,27 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 
 def get_locale():
+    # 1. Check if language is set in session
     if 'language' in session:
         logger.debug(f"Language from session: {session['language']}")
         return session['language']
 
+    # 2. Check browser preference
     best_match = request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
-    logger.debug(f"Language from browser: {best_match}")
-    return best_match
+    if best_match:
+        logger.debug(f"Language from browser: {best_match}")
+        return best_match
+    
+    # 3. Fall back to default locale
+    default_locale = app.config['BABEL_DEFAULT_LOCALE']
+    logger.debug(f"Using default locale: {default_locale}")
+    return default_locale
 
 
 # Remove mail initialization
 # mail = Mail(app)
 babel = Babel()
 babel.init_app(app, locale_selector=get_locale)
-
 
 def get_admin_emails():
     """Parse the ADMIN_EMAIL env var into a list of valid email addresses."""
@@ -140,6 +153,32 @@ def send_email(to_email, subject, html_content, text_content=None):
 
 @app.before_request
 def before_request():
+    global visitor_count, visitors
+    
+    # Set default language in session if not already set (first visit)
+    if 'language' not in session:
+        session['language'] = app.config['BABEL_DEFAULT_LOCALE']
+        logger.debug(f"Setting default language in session: {session['language']}")
+    
+    # Visitor tracking
+    if 'visitor_id' not in session:
+        # Generate a unique visitor ID
+        visitor_id = str(uuid.uuid4())
+        session['visitor_id'] = visitor_id
+        visitor_count += 1
+        
+        # Store visitor info
+        visitors[visitor_id] = {
+            'first_seen': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'ip': request.remote_addr,
+            'user_agent': request.user_agent.string,
+            'language': session['language']
+        }
+        
+        logger.debug(f"New visitor! Total unique visitors: {visitor_count}")
+        logger.debug(f"Visitor info: {visitors[visitor_id]}")
+    
+    # Set locale for this request
     g.locale = get_locale()
 
 
@@ -159,6 +198,18 @@ def index():
 def request_form():
     return render_template('form.html')
 
+@app.route('/stats', methods=['GET'])
+def visitor_stats():
+    # This is a simple debug route to view visitor statistics
+    # In a production environment, you would want to secure this with authentication
+    if app.debug:
+        return {
+            'total_unique_visitors': visitor_count,
+            'active_sessions': len(visitors),
+            'visitors': visitors
+        }
+    else:
+        return "Stats only available in debug mode", 403
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
@@ -177,6 +228,7 @@ def submit_form():
 
     # Get the current locale for email content
     current_locale = get_locale()
+
 
     # Create email content with translated content
     if current_locale == 'bg':
