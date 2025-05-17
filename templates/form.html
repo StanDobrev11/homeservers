@@ -1,108 +1,137 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Add translations for JavaScript validation messages -->
-    <script>
-        const translations = {
-            nameError: "{{ _('Name must contain only letters and be at least 3 characters long') }}",
-            emailError: "{{ _('Please enter a valid email address') }}",
-            phoneError: "{{ _('Please enter a valid phone number (9 digits after the leading 0)') }}",
-            requiredFields: "{{ _('Please fill out all required fields.') }}",
-            validationErrors: "{{ _('Please correct all errors before submitting the form.') }}"
-        };
-    </script>
-    
-    <section class="intro">
-        <h2>{{ _('NAS Requirements Form') }}</h2>
-        <p>{{ _('Fill out the form below to help me understand your needs, and I\'ll create a personalized NAS build recommendation just for you.') }}</p>
-    </section>
+<script>
+    const translations = {
+        nameError: "{{ _('Name must contain only letters and be at least 3 characters long') }}",
+        emailError: "{{ _('Please enter a valid email address') }}",
+        phoneError: "{{ _('Please enter a valid phone number (9 digits after the leading 0)') }}",
+        requiredFields: "{{ _('Please fill out all required fields.') }}",
+        validationErrors: "{{ _('Please correct all errors before submitting the form.') }}",
+        specs: {
+            home_basic: `{{ _('Recommended: 2x1TB HDD in RAID 1, dual-core CPU, no GPU, 4GB RAM') }}`,
+            home_media: `{{ _('Recommended: 2x4TB HDD in RAID 1 or 5, quad-core CPU, low-power GPU for transcoding, 8GB RAM') }}`,
+            small_business: `{{ _('Recommended: 4x6TB HDD in RAID 5/6, 4-core+ CPU, ECC RAM, 16GB+ RAM, UPS') }}`,
+            professional: `{{ _('Recommended: 8+ drives in RAID 6 or ZFS, Xeon CPU, ECC RAM 32GB+, backup power & cloud replication') }}`
+        }
+    };
 
-    <section class="form-section">
-        <form action="{{ url_for('submit_form') }}" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    function updateSpecs() {
+        const usage = document.getElementById("usage_type").value;
+        const specsBox = document.getElementById("specs-suggestion");
 
+        if (translations.specs[usage]) {
+            specsBox.innerText = translations.specs[usage];
+            specsBox.style.display = 'block';
+        } else {
+            specsBox.style.display = 'none';
+        }
+    }
 
-            <div class="form-group">
-                <label for="name">{{ _('Name') }}</label>
-                <input type="text" id="name" name="name" required
-                       pattern="[A-Za-z\u00C0-\u017F\s]{3,}"
-                       title="{{ _('Name must contain only letters and be at least 3 characters long') }}">
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("usage_type").addEventListener("change", updateSpecs);
+    });
+</script>
+
+<section class="intro">
+    <h2>{{ _('NAS Requirements Form') }}</h2>
+    <p>{{ _('Fill out the form below to help me understand your needs, and I\'ll create a personalized NAS build recommendation just for you.') }}</p>
+</section>
+
+<section class="form-section">
+    <form action="{{ url_for('submit_form') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="form-group">
+            <label for="name">{{ _('Name') }}</label>
+            <input type="text" id="name" name="name" required
+                   pattern="[A-Za-z\u00C0-\u017F\s]{3,}"
+                   title="{{ _('Name must contain only letters and be at least 3 characters long') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="email">{{ _('Email') }}</label>
+            <input type="email" id="email" name="email" required
+                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                   title="{{ _('Please enter a valid email address') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">{{ _('Phone Number') }}</label>
+            <div class="phone-input-container">
+                <span class="country-code">+359</span>
+                <span class="leading-zero">(0)</span>
+                <input type="tel" id="phone" name="phone" required
+                       placeholder="887123456"
+                       pattern="[0-9]{9}"
+                       title="{{ _('Please enter a valid phone number (9 digits after the leading 0)') }}">
             </div>
+            <small class="form-text text-muted">{{ _('Format: +359 (0) 887123456') }}</small>
+        </div>
 
-
-            <div class="form-group">
-                <label for="email">{{ _('Email') }}</label>
-                <input type="email" id="email" name="email" required
-                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                       title="{{ _('Please enter a valid email address') }}">
+        <div class="form-group">
+            <label for="usage_type">{{ _('Primary Usage') }}</label>
+            <div class="usage-info" style="margin-bottom: 15px; background: #f9f9f9; padding: 15px; border-radius: 5px;">
+                <p style="font-weight: bold;">{{ _('Choose the setup that best matches your needs:') }}</p>
+                <ul style="margin-top: 10px;">
+                    <li><strong>{{ _('Home Basic (File Storage, Photos):') }}</strong> {{ _('Perfect for individuals or families who need simple file backup, photo storage, and document archiving. Ideal for home users who want to keep their digital memories safe.') }}</li>
+                    <li><strong>{{ _('Home Media (Plex, Streaming):') }}</strong> {{ _('Designed for media enthusiasts who want to store and stream movies, TV shows, and music throughout their home. Supports transcoding and multiple simultaneous streams.') }}</li>
+                    <li><strong>{{ _('Small Business:') }}</strong> {{ _('Tailored for small businesses requiring reliable data storage, file sharing, centralized backup, and multi-user access with proper permissions and security controls.') }}</li>
+                    <li><strong>{{ _('Professional/Enterprise:') }}</strong> {{ _('Enterprise-grade solution for organizations with demanding storage requirements, needing high availability, maximum data protection, and advanced management features.') }}</li>
+                </ul>
             </div>
+            <select id="usage_type" name="usage_type" required>
+                <option value="">{{ _('-- Select --') }}</option>
+                <option value="home_basic">{{ _('Home Basic (File Storage, Photos)') }}</option>
+                <option value="home_media">{{ _('Home Media (Plex, Streaming)') }}</option>
+                <option value="small_business">{{ _('Small Business') }}</option>
+                <option value="professional">{{ _('Professional/Enterprise') }}</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="phone">{{ _('Phone Number') }}</label>
-                <div class="phone-input-container">
-                    <span class="country-code">+359</span>
-                    <span class="leading-zero">(0)</span>
-                    <input type="tel" id="phone" name="phone" required
-                           placeholder="887123456" 
-                           pattern="[0-9]{9}"
-                           title="{{ _('Please enter a valid Bulgarian phone number (9 digits after the leading 0)') }}">
-                </div>
-                <small class="form-text text-muted">{{ _('Format: +359 (0) 887123456') }}</small>
-            </div>
+        <div id="specs-suggestion" class="form-group text-info" style="display:none; margin-top:-10px; font-style: italic;"></div>
 
-            <div class="form-group">
-                <label for="usage_type">{{ _('Primary Usage') }}</label>
-                <select id="usage_type" name="usage_type" required>
-                    <option value="">{{ _('-- Select --') }}</option>
-                    <option value="home_basic">{{ _('Home Basic (File Storage, Photos)') }}</option>
-                    <option value="home_media">{{ _('Home Media (Plex, Streaming)') }}</option>
-                    <option value="small_business">{{ _('Small Business') }}</option>
-                    <option value="professional">{{ _('Professional/Enterprise') }}</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="storage_needs">{{ _('Storage Needs') }}</label>
+            <select id="storage_needs" name="storage_needs" required>
+                <option value="">{{ _('-- Select --') }}</option>
+                <option value="less_than_4tb">{{ _('Less than 4TB') }}</option>
+                <option value="4tb_to_12tb">{{ _('4TB to 12TB') }}</option>
+                <option value="12tb_to_30tb">{{ _('12TB to 30TB') }}</option>
+                <option value="more_than_30tb">{{ _('More than 30TB') }}</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="storage_needs">{{ _('Storage Needs') }}</label>
-                <select id="storage_needs" name="storage_needs" required>
-                    <option value="">{{ _('-- Select --') }}</option>
-                    <option value="less_than_4tb">{{ _('Less than 4TB') }}</option>
-                    <option value="4tb_to_12tb">{{ _('4TB to 12TB') }}</option>
-                    <option value="12tb_to_30tb">{{ _('12TB to 30TB') }}</option>
-                    <option value="more_than_30tb">{{ _('More than 30TB') }}</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="backup_plans">{{ _('Backup Requirements') }}</label>
+            <select id="backup_plans" name="backup_plans" required>
+                <option value="">{{ _('-- Select --') }}</option>
+                <option value="basic_redundancy">{{ _('Basic Redundancy (RAID 1)') }}</option>
+                <option value="performance_redundancy">{{ _('Performance & Redundancy (RAID 5/6)') }}</option>
+                <option value="offsite_backup">{{ _('Offsite Backup Solutions') }}</option>
+                <option value="full_disaster_recovery">{{ _('Full Disaster Recovery') }}</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="backup_plans">{{ _('Backup Requirements') }}</label>
-                <select id="backup_plans" name="backup_plans" required>
-                    <option value="">{{ _('-- Select --') }}</option>
-                    <option value="basic_redundancy">{{ _('Basic Redundancy (RAID 1)') }}</option>
-                    <option value="performance_redundancy">{{ _('Performance & Redundancy (RAID 5/6)') }}</option>
-                    <option value="offsite_backup">{{ _('Offsite Backup Solutions') }}</option>
-                    <option value="full_disaster_recovery">{{ _('Full Disaster Recovery') }}</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="budget">{{ _('Budget Range') }}</label>
+            <select id="budget" name="budget" required>
+                <option value="">{{ _('-- Select --') }}</option>
+                <option value="under_500">{{ _('Under 900 BGN') }}</option>
+                <option value="500_to_1000">{{ _('900 to 1,800 BGN') }}</option>
+                <option value="1000_to_2000">{{ _('1,800 to 3,600 BGN') }}</option>
+                <option value="over_2000">{{ _('Over 3,600 BGN') }}</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="budget">{{ _('Budget Range') }}</label>
-                <select id="budget" name="budget" required>
-                    <option value="">{{ _('-- Select --') }}</option>
-                    <option value="under_500">{{ _('Under $500') }}</option>
-                    <option value="500_to_1000">{{ _('$500 to $1,000') }}</option>
-                    <option value="1000_to_2000">{{ _('$1,000 to $2,000') }}</option>
-                    <option value="over_2000">{{ _('Over $2,000') }}</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="comments">{{ _('Additional Requirements or Comments') }}</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="comments">{{ _('Additional Requirements or Comments') }}</label>
-                <textarea id="comments" name="comments" rows="4"></textarea>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">{{ _('Submit Request') }}</button>
-            </div>
-
-        </form>
-    </section>
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">{{ _('Submit Request') }}</button>
+        </div>
+    </form>
+</section>
 {% endblock %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-14 18:52+0000\n"
+"POT-Creation-Date: 2025-05-17 09:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: bg\n"
@@ -38,281 +38,190 @@ msgstr "Заяви персонализиран NAS"
 msgid "© 2025 Custom NAS Builder. All rights reserved."
 msgstr "© 2025 Конфигуратор за NAS. Всички права запазени."
 
-#: templates/form.html:7 templates/form.html:29
+#: templates/form.html:6 templates/form.html:49
 msgid "Name must contain only letters and be at least 3 characters long"
 msgstr "Името трябва да съдържа само букви и да е поне 3 символа"
 
-#: templates/form.html:8 templates/form.html:37
+#: templates/form.html:7 templates/form.html:56
 msgid "Please enter a valid email address"
 msgstr "Моля, въведете валиден имейл адрес"
 
-#: templates/form.html:9
+#: templates/form.html:8 templates/form.html:67
 msgid "Please enter a valid phone number (9 digits after the leading 0)"
 msgstr "Моля, въведете валиден телефонен номер (9 цифри след водещата 0)"
 
-#: templates/form.html:10
+#: templates/form.html:9
 msgid "Please fill out all required fields."
 msgstr "Моля, попълнете всички задължителни полета."
 
-#: templates/form.html:11
+#: templates/form.html:10
 msgid "Please correct all errors before submitting the form."
 msgstr "Моля, коригирайте всички грешки преди да изпратите формуляра."
 
-#: templates/form.html:16
+#: templates/form.html:12
+msgid "Recommended: 2x1TB HDD in RAID 1, dual-core CPU, no GPU, 4GB RAM"
+msgstr "Препоръчително: 2x1TB HDD в RAID 1, двуядрен процесор, без GPU, 4GB RAM"
+
+#: templates/form.html:13
+msgid "Recommended: 2x4TB HDD in RAID 1 or 5, quad-core CPU, low-power GPU for transcoding, 8GB RAM"
+msgstr "Препоръчително: 2x4TB HDD в RAID 1 или 5, четириядрен процесор, нискоенергиен GPU за транскодиране, 8GB RAM"
+
+#: templates/form.html:14
+msgid "Recommended: 4x6TB HDD in RAID 5/6, 4-core+ CPU, ECC RAM, 16GB+ RAM, UPS"
+msgstr "Препоръчително: 4x6TB HDD в RAID 5/6, 4+ ядрен процесор, ECC RAM, 16GB+ RAM, UPS"
+
+#: templates/form.html:15
+msgid "Recommended: 8+ drives in RAID 6 or ZFS, Xeon CPU, ECC RAM 32GB+, backup power & cloud replication"
+msgstr "Препоръчително: 8+ диска в RAID 6 или ZFS, Xeon процесор, 32GB+ ECC RAM, резервно захранване и облачно копиране"
+
+#: templates/form.html:37
 msgid "NAS Requirements Form"
 msgstr "Форма за изисквания към NAS"
 
-#: templates/form.html:17
-msgid ""
-"Fill out the form below to help me understand your needs, and I'll create"
-" a personalized NAS build recommendation just for you."
-msgstr ""
-"Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, "
-"и ще изготвя персонализирана препоръка за NAS система специално за вас."
+#: templates/form.html:38
+msgid "Fill out the form below to help me understand your needs, and I'll create a personalized NAS build recommendation just for you."
+msgstr "Попълнете формата по-долу, за да ми помогнете да разбера вашите нужди, и ще изготвим персонализирана препоръка за NAS система специално за Вас."
 
-#: templates/form.html:26
+#: templates/form.html:46
 msgid "Name"
 msgstr "Име"
 
-#: templates/form.html:34
+#: templates/form.html:53
 msgid "Email"
 msgstr "Имейл"
 
-#: templates/form.html:41
+#: templates/form.html:60
 msgid "Phone Number"
 msgstr "Телефонен номер"
 
-#: templates/form.html:48
-#, fuzzy
-msgid "Please enter a valid Bulgarian phone number (9 digits after the leading 0)"
-msgstr "Моля, въведете валиден телефонен номер (9 цифри след водещата 0)"
-
-#: templates/form.html:50
+#: templates/form.html:69
 msgid "Format: +359 (0) 887123456"
 msgstr "Формат: +359 (0) 887123456"
 
-#: templates/form.html:54
+#: templates/form.html:73
 msgid "Primary Usage"
 msgstr "Основна употреба"
 
-#: templates/form.html:56 templates/form.html:67 templates/form.html:78
-#: templates/form.html:89
+#: templates/form.html:75
+msgid "Choose the setup that best matches your needs:"
+msgstr "Изберете конфигурация, която най-добре отговаря на вашите нужди:"
+
+#: templates/form.html:77
+msgid "Home Basic (File Storage, Photos):"
+msgstr "Домашно базово (съхранение на файлове, снимки):"
+
+#: templates/form.html:78
+msgid "Home Media (Plex, Streaming):"
+msgstr "Домашна мултимедия (Plex, стрийминг):"
+
+#: templates/form.html:79
+msgid "Small Business:"
+msgstr "Малък бизнес:"
+
+#: templates/form.html:80
+msgid "Professional/Enterprise:"
+msgstr "Професионално/Корпоративно:"
+
+#: templates/form.html:77
+msgid "Perfect for individuals or families who need simple file backup, photo storage, and document archiving. Ideal for home users who want to keep their digital memories safe."
+msgstr "Идеално за хора или семейства, които търсят лесно архивиране на файлове, снимки и документи. Подходящо за домашни потребители, желаещи да съхранят дигиталните си спомени безопасно."
+
+#: templates/form.html:78
+msgid "Designed for media enthusiasts who want to store and stream movies, TV shows, and music throughout their home. Supports transcoding and multiple simultaneous streams."
+msgstr "Проектирано за медийни ентусиасти, които желаят да съхраняват и стриймват филми, сериали и музика у дома. Поддържа транскодиране и множество едновременни потоци."
+
+#: templates/form.html:79
+msgid "Tailored for small businesses requiring reliable data storage, file sharing, centralized backup, and multi-user access with proper permissions and security controls."
+msgstr "Подходящо за малки фирми, нуждаещи се от надеждно съхранение на данни, споделяне на файлове, централизирано архивиране и достъп за множество потребители с подходящи разрешения и защита."
+
+#: templates/form.html:80
+msgid "Enterprise-grade solution for organizations with demanding storage requirements, needing high availability, maximum data protection, and advanced management features."
+msgstr "Корпоративно решение за организации с високи изисквания за съхранение, нуждаещи се от висока достъпност, максимална защита на данните и разширени функции за управление."
+
+#: templates/form.html:84 templates/form.html:97 templates/form.html:108 templates/form.html:119
 msgid "-- Select --"
 msgstr "-- Изберете --"
 
-#: templates/form.html:57
+#: templates/form.html:85
 msgid "Home Basic (File Storage, Photos)"
 msgstr "Домашно базово (съхранение на файлове, снимки)"
 
-#: templates/form.html:58
+#: templates/form.html:86
 msgid "Home Media (Plex, Streaming)"
 msgstr "Домашна мултимедия (Plex, стрийминг)"
 
-#: templates/form.html:59
+#: templates/form.html:87
 msgid "Small Business"
 msgstr "Малък бизнес"
 
-#: templates/form.html:60
+#: templates/form.html:88
 msgid "Professional/Enterprise"
 msgstr "Професионално/Корпоративно"
 
-#: templates/form.html:65
+#: templates/form.html:95
 msgid "Storage Needs"
 msgstr "Нужди от съхранение"
 
-#: templates/form.html:68
+#: templates/form.html:98
 msgid "Less than 4TB"
 msgstr "По-малко от 4TB"
 
-#: templates/form.html:69
+#: templates/form.html:99
 msgid "4TB to 12TB"
 msgstr "От 4TB до 12TB"
 
-#: templates/form.html:70
+#: templates/form.html:100
 msgid "12TB to 30TB"
 msgstr "От 12TB до 30TB"
 
-#: templates/form.html:71
+#: templates/form.html:101
 msgid "More than 30TB"
 msgstr "Над 30TB"
 
-#: templates/form.html:76
+#: templates/form.html:106
 msgid "Backup Requirements"
 msgstr "Изисквания за архивиране"
 
-#: templates/form.html:79
+#: templates/form.html:109
 msgid "Basic Redundancy (RAID 1)"
 msgstr "Базова излишност (RAID 1)"
 
-#: templates/form.html:80
+#: templates/form.html:110
 msgid "Performance & Redundancy (RAID 5/6)"
 msgstr "Производителност и излишност (RAID 5/6)"
 
-#: templates/form.html:81
+#: templates/form.html:111
 msgid "Offsite Backup Solutions"
 msgstr "Архивиране извън обекта"
 
-#: templates/form.html:82
+#: templates/form.html:112
 msgid "Full Disaster Recovery"
 msgstr "Пълно възстановяване след бедствия"
 
-#: templates/form.html:87
+#: templates/form.html:117
 msgid "Budget Range"
 msgstr "Бюджетен диапазон"
 
-#: templates/form.html:90
-msgid "Under $500"
-msgstr "Под $500"
+#: templates/form.html:120
+msgid "Under 900 BGN"
+msgstr "Под 900 лв."
 
-#: templates/form.html:91
-msgid "$500 to $1,000"
-msgstr "От $500 до $1,000"
+#: templates/form.html:121
+msgid "900 to 1,800 BGN"
+msgstr "От 900 до 1,800 лв."
 
-#: templates/form.html:92
-msgid "$1,000 to $2,000"
-msgstr "От $1,000 до $2,000"
+#: templates/form.html:122
+msgid "1,800 to 3,600 BGN"
+msgstr "От 1,800 до 3,600 лв."
 
-#: templates/form.html:93
-msgid "Over $2,000"
-msgstr "Над $2,000"
+#: templates/form.html:123
+msgid "Over 3,600 BGN"
+msgstr "Над 3,600 лв."
 
-#: templates/form.html:98
+#: templates/form.html:128
 msgid "Additional Requirements or Comments"
 msgstr "Допълнителни изисквания или коментари"
 
-#: templates/form.html:103
+#: templates/form.html:133
 msgid "Submit Request"
 msgstr "Изпрати заявка"
-
-#: templates/landing.html:5
-msgid "Take Control of Your Digital World – At Home!"
-msgstr "Поеми контрол над своя дигитален свят – у дома!"
-
-#: templates/landing.html:8
-msgid "Introducing Your Personal Media Fortress"
-msgstr "Представяме ви вашата лична медийна крепост"
-
-#: templates/landing.html:9
-msgid ""
-"Tired of being limited by the cloud? Want high speed and performance for "
-"your photos, music, movies and files – anytime, anywhere, without "
-"limitations?"
-msgstr ""
-"Уморени ли сте от ограниченията на облака? Искате висока скорост и "
-"производителност за вашите снимки, музика, филми и файлове – по всяко "
-"време, навсякъде, без ограничения?"
-
-#: templates/landing.html:11
-msgid "We Build and Install Personal Home Servers"
-msgstr "Изграждаме и инсталираме персонални домашни сървъри"
-
-#: templates/landing.html:12
-msgid ""
-"Whether you are a consumer, creator, media enthusiast, or a business in "
-"need of storage, we deliver powerful, secure, scalable solutions tailored"
-" to your needs and requirements."
-msgstr ""
-"Независимо дали сте потребител, създател на съдържание, медиен "
-"ентусиаст или бизнес с нужда от съхранение, ние предоставяме мощни, "
-"сигурни и мащабируеми решения, съобразени с вашите нужди."
-
-#: templates/landing.html:15
-msgid "Keep Everything You Love"
-msgstr "Съхранете всичко, което обичате"
-
-#: templates/landing.html:17
-msgid "Photos"
-msgstr "Снимки"
-
-#: templates/landing.html:18
-msgid "Music"
-msgstr "Музика"
-
-#: templates/landing.html:19
-msgid "Movies"
-msgstr "Филми"
-
-#: templates/landing.html:20
-msgid "Documents"
-msgstr "Документи"
-
-#: templates/landing.html:21
-msgid "Backups & Much More"
-msgstr "Архиви и много повече"
-
-#: templates/landing.html:26
-msgid "Why Choose Us?"
-msgstr "Защо да изберете нас?"
-
-#: templates/landing.html:28
-msgid "Fast Speed"
-msgstr "Висока скорост"
-
-#: templates/landing.html:29
-msgid "High Data Control and Complete Privacy"
-msgstr "Пълен контрол върху данните и пълна поверителност"
-
-#: templates/landing.html:30
-msgid "No Monthly Fees or Choose Subscription Maintenance"
-msgstr "Без месечни такси или възможност за абонаментна поддръжка"
-
-#: templates/landing.html:31
-msgid "Seamless Streaming and Sharing"
-msgstr "Безпроблемно стриймване и споделяне"
-
-#: templates/landing.html:32
-msgid "Expert Installation and Support"
-msgstr "Професионална инсталация и поддръжка"
-
-#: templates/landing.html:36
-msgid "Your Data. Your Rules. Your Server."
-msgstr "Вашите данни. Вашите правила. Вашият сървър."
-
-#: templates/landing.html:38
-msgid ""
-"Contact us today and discover how easy it is to have your personal "
-"digital space."
-msgstr ""
-"Свържете се "
-"с нас днес и открийте колко лесно е да имате свое собствено дигитално "
-"пространство."
-
-#: templates/landing.html:39
-msgid "Personal. Reliable. Made Specifically for You."
-msgstr "Персонално. Надеждно. Създадено специално за вас."
-
-#: templates/landing.html:41
-msgid "[Varna Servers] – Powering Your Digital Freedom"
-msgstr "[Varna Servers] – Вашата дигитална свобода"
-
-#: templates/landing.html:44
-msgid "Sample Configuration:"
-msgstr "Примерна конфигурация:"
-
-#: templates/landing.html:46
-msgid "Energy-efficient computer with i-3 CPU"
-msgstr "Енергийно ефективен компютър с i-3 процесор"
-
-#: templates/landing.html:47
-msgid "4GB RAM"
-msgstr "4GB RAM"
-
-#: templates/landing.html:48
-msgid "128 GB SSD"
-msgstr "128 GB SSD"
-
-#: templates/landing.html:49
-msgid "4 TB mirrored storage or 8 TB with no backup"
-msgstr "4 TB огледално съхранение или 8 TB без резервно копие"
-
-#: templates/landing.html:51
-msgid ""
-"Price: 800 BGN + Shipping costs to be paid by the recipient (Promotion "
-"for assembly, installation and setup)"
-msgstr ""
-"Цена: 800 лв. + разходи за доставка за сметка на получателя (промоция за "
-"сглобяване, инсталация и настройка)"
-
-#: templates/landing.html:52
-msgid "We can compile more powerful configurations at the client's request"
-msgstr "Можем да предложим по-мощни конфигурации по желание на клиента"
