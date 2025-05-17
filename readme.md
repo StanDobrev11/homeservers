@@ -67,6 +67,10 @@ To update translations:
 ``` bash
    pybabel extract -F babel.cfg -o messages.pot .
 ```
+or
+``` bash
+pybabel extract --mapping babel.cfg --output messages.pot .
+```
 2. Create or update Bulgarian translations:
 ``` bash
    # Initialize (first time)
