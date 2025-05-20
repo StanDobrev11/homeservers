@@ -380,39 +380,50 @@ footer {
     width: auto;
 }
 
-/* Make the navbar responsive */
-@media (max-width: 768px) {
+/* Hide it in the default view*/
+.menu-toggle {
+    display: none;
+}
+
+/* Hide nav + language selector on mobile by default */
+@media (max-width: 640px) {
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    #main-nav,
+    #language-selector {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    #main-nav.active,
+    #language-selector.active {
+        display: flex;
+    }
+
     .navbar {
         flex-direction: column;
-        padding: 1rem;
+        align-items: flex-start;
     }
 
     .logo-container {
-        margin-bottom: 1rem;
-    }
-
-    .main-nav {
-        margin: 0.5rem 0;
         width: 100%;
-        justify-content: center;
-    }
-
-    .language-selector {
-        margin-top: 0.5rem;
-    }
-}
-
-/* For very small screens */
-@media (max-width: 480px) {
-    .main-nav {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
     }
 
-    .nav-link {
-        margin: 0.25rem 0;
+    .nav-link, .lang-btn {
+        padding: 0.5rem 1rem;
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
 }
 
