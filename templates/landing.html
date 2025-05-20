@@ -1,60 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero">
-    <h2>{{ _('Take Control of Your Digital World – At Home!') }}</h2>
-    
-    <div class="hero-content">
-        <h3>{{ _('Introducing Your Personal Media Fortress') }}</h3>
-        <p>{{ _('Tired of being limited by the cloud? Want high speed and performance for your photos, music, movies and files – anytime, anywhere, without limitations?') }}</p>
-        
-        <h3>{{ _('We Build and Install Personal Home Servers') }}</h3>
-        <p>{{ _('Whether you are a consumer, creator, media enthusiast, or a business in need of storage, we deliver powerful, secure, scalable solutions tailored to your needs and requirements.') }}</p>
-        
-        <div class="benefits-section">
-            <h3>{{ _('Keep Everything You Love') }}</h3>
-            <ul class="benefits-list">
-                <li>{{ _('Photos') }}</li>
-                <li>{{ _('Music') }}</li>
-                <li>{{ _('Movies') }}</li>
-                <li>{{ _('Documents') }}</li>
-                <li>{{ _('Backups & Much More') }}</li>
-            </ul>
+    <section class="hero">
+        <h2>{{ _('Take Control of Your Digital World – At Home!') }}</h2>
+
+        <div class="hero-content">
+            <h3>{{ _('Introducing Your Personal Media Fortress') }}</h3>
+            <p>{{ _('Tired of being limited by the cloud? Want high speed and performance for your photos, music, movies and files – anytime, anywhere, without limitations?') }}</p>
+
+            <h3>{{ _('We Build and Install Personal Home Servers') }}</h3>
+            <p>{{ _('Whether you are a consumer, creator, media enthusiast, or a business in need of storage, we deliver powerful, secure, scalable solutions tailored to your needs and requirements.') }}</p>
+
+            <div class="benefits-section">
+                <h3>{{ _('Keep Everything You Love') }}</h3>
+                <ul class="benefits-list">
+                    <li>{{ _('Photos') }}</li>
+                    <li>{{ _('Music') }}</li>
+                    <li>{{ _('Movies') }}</li>
+                    <li>{{ _('Documents') }}</li>
+                    <li>{{ _('Backups & Much More') }}</li>
+                </ul>
+            </div>
+
+            <div class="why-us-section">
+                <h3>{{ _('Why Choose Us?') }}</h3>
+                <ul class="why-us-list">
+                    <li>{{ _('Fast Speed') }}</li>
+                    <li>{{ _('High Data Control and Complete Privacy') }}</li>
+                    <li>{{ _('No Monthly Fees or Choose Subscription Maintenance') }}</li>
+                    <li>{{ _('Seamless Streaming and Sharing') }}</li>
+                    <li>{{ _('Expert Installation and Support') }}</li>
+                </ul>
+            </div>
+
+            <p class="tagline">{{ _('Your Data. Your Rules. Your Server.') }}</p>
+
+            <p>{{ _('Contact us today and discover how easy it is to have your personal digital space.') }}</p>
+            <p>{{ _('Personal. Reliable. Made Specifically for You.') }}</p>
+
+            <p class="brand">{{ _('[Home Servers] – Powering Your Digital Freedom') }}</p>
+
+            <div class="sample-config">
+                <h3>{{ _('Sample Image Storage Configuration:') }}</h3>
+                <ul>
+                    <li>{{ _('Intel Core i3-4160T CPU') }}</li>
+                    <li>{{ _('8GB RAM') }}</li>
+                    <li>{{ _('128 GB SSD') }}</li>
+                    <li>{{ _('2 x 1 TB HDDs with mirrored backup') }}</li>
+                </ul>
+                <p class="price">{{ _('Price:') }} 549 {{ _('BGN') }}</p>
+                <p>{{ _('Ideal for basic image storage and remote access from mobile devices.') }}</p>
+                <p>{{ _('The price includes shipping costs and a mobile phone configuration for remote access/upload.') }}</p>
+            </div>
+
+            <div class="sample-config">
+                <h3>{{ _('Sample Multimedia Configuration:') }}</h3>
+                <ul>
+                    <li>{{ _('Intel Core i3-4160T CPU') }}</li>
+                    <li>{{ _('8GB RAM') }}</li>
+                    <li>{{ _('128 GB SSD') }}</li>
+                    <li>{{ _('4 TB mirrored storage or 8 TB with no backup') }}</li>
+                </ul>
+                <p class="price">{{ _('Price:') }} 849 {{ _('BGN') }}</p>
+                <p>{{ _('The price includes shipping costs, a mobile phone configuration for remote access/upload') }} {{ _('and media setup on one device.') }}</p>
+                <p>{{ _('This machine is perfect for for image storage and sync, multimedia server, file storage, etc.') }}</p>
+                <p>{{ _('We can compile more powerful configurations at the client\'s request') }}</p>
+            </div>
+
+            <div class="cta-container">
+                <a href="{{ url_for('request_form') }}" class="cta-button">{{ _('Request Custom NAS') }}</a>
+            </div>
         </div>
-        
-        <div class="why-us-section">
-            <h3>{{ _('Why Choose Us?') }}</h3>
-            <ul class="why-us-list">
-                <li>{{ _('Fast Speed') }}</li>
-                <li>{{ _('High Data Control and Complete Privacy') }}</li>
-                <li>{{ _('No Monthly Fees or Choose Subscription Maintenance') }}</li>
-                <li>{{ _('Seamless Streaming and Sharing') }}</li>
-                <li>{{ _('Expert Installation and Support') }}</li>
-            </ul>
-        </div>
-        
-        <p class="tagline">{{ _('Your Data. Your Rules. Your Server.') }}</p>
-        
-        <p>{{ _('Contact us today and discover how easy it is to have your personal digital space.') }}</p>
-        <p>{{ _('Personal. Reliable. Made Specifically for You.') }}</p>
-        
-        <p class="brand">{{ _('[Varna Servers] – Powering Your Digital Freedom') }}</p>
-        
-        <div class="sample-config">
-            <h3>{{ _('Sample Configuration:') }}</h3>
-            <ul>
-                <li>{{ _('Energy-efficient computer with i-3 CPU') }}</li>
-                <li>{{ _('4GB RAM') }}</li>
-                <li>{{ _('128 GB SSD') }}</li>
-                <li>{{ _('4 TB mirrored storage or 8 TB with no backup') }}</li>
-            </ul>
-            <p class="price">{{ _('Price: 800 BGN + Shipping costs to be paid by the recipient (Promotion for assembly, installation and setup)') }}</p>
-            <p>{{ _('We can compile more powerful configurations at the client\'s request') }}</p>
-        </div>
-        
-        <div class="cta-container">
-            <a href="{{ url_for('request_form') }}" class="cta-button">{{ _('Request Custom NAS') }}</a>
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
