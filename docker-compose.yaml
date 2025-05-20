@@ -13,3 +13,5 @@ services:
       - SERVER_NAME=${SERVER_NAME}
     volumes:
       - ./:/app
+    command: sh -c "pybabel compile -d translations &&
+      gunicorn --bind=0.0.0.0:5000 app:app"

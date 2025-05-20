@@ -17,10 +17,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_PORT=5000
 ENV PYTHONUNBUFFERED=1
-
-RUN pybabel extract -F babel.cfg -o messages.pot .
-RUN pybabel update -i messages.pot -d translations
-RUN pybabel compile -d translations
-
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
-
