@@ -1,15 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, g, session
 from flask_babel import Babel
+from flask_mail import Mail, Message
 from flask_wtf.csrf import CSRFProtect  # Import CSRFProtect
 import os
 from dotenv import load_dotenv
 import logging
 import uuid
 from datetime import datetime
-
-# Import Brevo's SDK
-import sib_api_v3_sdk
-from sib_api_v3_sdk.rest import ApiException
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -52,6 +49,8 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = (SENDER_NAME, SENDER_EMAIL)
 
+mail = Mail(app)
+
 def get_locale():
     # 1. Check if language is set in session
     if 'language' in session:
@@ -89,66 +88,34 @@ def get_admin_emails():
 
 def send_email(to_email, subject, html_content, text_content=None):
     """
-    Send email using Brevo API
+    Send email using Flask-Mail and Brevo SMTP settings.
     """
-    # Input validation
-    if not BREVO_API_KEY:
-        error_msg = "Brevo API key is not configured"
+
+    # Handle recipient list
+    if isinstance(to_email, list):
+        recipients = [email.strip() for email in to_email if isinstance(email, str) and '@' in email]
+    elif isinstance(to_email, str) and '@' in to_email:
+        recipients = [to_email.strip()]
+    else:
+        error_msg = f"Invalid email address: {to_email}"
         logger.error(error_msg)
         return False, error_msg
 
-    # Configure API key authorization
-    configuration = sib_api_v3_sdk.Configuration()
-    configuration.api_key['api-key'] = BREVO_API_KEY
-
-    # Create an instance of the API class
-    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
-
-    # Define sender
-    sender = {"name": SENDER_NAME, "email": SENDER_EMAIL}
-
-    # Handle different types of email inputs
-    if isinstance(to_email, list):
-        # If it's a list of emails
-        to = []
-        for email_addr in to_email:
-            if isinstance(email_addr, str) and '@' in email_addr:
-                to.append({"email": email_addr.strip()})
-                logger.debug(f"Added recipient: {email_addr.strip()}")
-    else:
-        # If it's a single email
-        if isinstance(to_email, str) and '@' in to_email:
-            to = [{"email": to_email.strip()}]
-            logger.debug(f"Set single recipient: {to_email.strip()}")
-        else:
-            error_msg = f"Invalid email address: {to_email}"
-            logger.error(error_msg)
-            return False, error_msg
-
-    # If no valid recipients, return error
-    if not to:
+    if not recipients:
         error_msg = "No valid recipient email addresses found"
         logger.error(error_msg)
         return False, error_msg
 
-    logger.debug(f"Sending email to: {to}")
-
-    # Create SendSmtpEmail object
-    send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
-        to=to,
-        sender=sender,
-        subject=subject,
-        html_content=html_content,
-        text_content=text_content or html_content
-    )
-
     try:
-        # Send the email
-        api_response = api_instance.send_transac_email(send_smtp_email)
-        logger.debug(f"Email sent successfully: {api_response}")
+        msg = Message(subject=subject, recipients=recipients)
+        msg.body = text_content or html_content
+        msg.html = html_content
+
+        mail.send(msg)
+        logger.debug(f"Email sent successfully to: {recipients}")
         return True, None
-    except ApiException as e:
-        error_msg = f"Exception when calling Brevo API: {e}"
+    except Exception as e:
+        error_msg = f"Failed to send email: {e}"
         logger.error(error_msg)
         return False, error_msg
 
