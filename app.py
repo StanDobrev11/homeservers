@@ -33,12 +33,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-dev-key')
 # Initialize CSRF protection
 csrf = CSRFProtect(app)
 
-# Replace MailHog configuration with Brevo API key
-BREVO_API_KEY = os.getenv('BREVO_API_KEY')
-
-SENDER_NAME = os.getenv('SENDER_NAME')
-SENDER_EMAIL = os.getenv('SENDER_EMAIL')
-
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Babel configuration
@@ -46,9 +40,17 @@ app.config['BABEL_DEFAULT_LOCALE'] = 'bg'
 app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'bg']
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'translations')
 
-# Admin email for receiving form submissions
+SENDER_NAME = os.getenv('SENDER_NAME')
+SENDER_EMAIL = os.getenv('SENDER_EMAIL')
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
+# SMTP config
+app.config['MAIL_SERVER'] = 'smtp-relay.brevo.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = (SENDER_NAME, SENDER_EMAIL)
 
 def get_locale():
     # 1. Check if language is set in session
